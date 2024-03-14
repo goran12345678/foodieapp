@@ -9,12 +9,12 @@ public class Menu {
 	String restaurantName; //displayed in frontend
 	String restaurantHours; //displayed in frontend
 	String restaurantAddress; //displayed in frontend
-	ArrayList<Menu> menuItems; //populated by frontend
+	ArrayList<MenuItem> menuItems; //populated by frontend
 	Float total;
 	public Menu() {
 		// TODO Auto-generated constructor stub
 	}
-	public Menu(String restaurantName, String restaurantHours, String restaurantAddress, ArrayList<Menu> menuItems) {
+	public Menu(String restaurantName, String restaurantHours, String restaurantAddress, ArrayList<MenuItem> menuItems) {
 		this.restaurantName = restaurantName;
 		this.restaurantHours = restaurantHours;
 		this.restaurantAddress = restaurantAddress;
@@ -38,10 +38,10 @@ public class Menu {
 	public void setRestaurantAddress(String restaurantAddress) {
 		this.restaurantAddress = restaurantAddress;
 	}
-	public ArrayList<Menu> getMenuItems() {
+	public ArrayList<MenuItem> getMenuItems() {
 		return menuItems;
 	}
-	public void setMenuItems(ArrayList<Menu> menuItems) {
+	public void setMenuItems(ArrayList<MenuItem> menuItems) {
 		this.menuItems = menuItems;
 	}
 	public Float getTotal() {
