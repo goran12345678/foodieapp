@@ -1,9 +1,10 @@
-package com.foodiecorp.foodiewebservice;
+package com.foodiecorp.foodiewebservice.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,7 +40,7 @@ public class AppController {
 		integrators.put(integrator2.getMenu().getRestaurantName(), integrator2);
 		integrators.put(integrator3.getMenu().getRestaurantName(), integrator3);
 	}
-	
+	@CrossOrigin
 	@PostMapping("/addtoshoppingcart")
 	public ArrayList<Menu> addToShoppingCart(@RequestBody Menu menu) {
 		System.out.println("[AppController] addToShoppingCart called");
@@ -54,6 +55,7 @@ public class AppController {
 		
 		return new ArrayList<Menu>(shoppingCart.values());
 	}
+	@CrossOrigin
 	@PostMapping("/removefromshoppingcart")
 	public ArrayList<Menu> removeFromShoppingCart(@RequestBody Menu menu){
 		shoppingCart.remove(menu.getRestaurantName());
@@ -69,7 +71,12 @@ public class AppController {
 		return new ArrayList<Menu>(shoppingCart.values());
 		
 	}
-	
+	@CrossOrigin
+	@GetMapping("/getshoppingcart")
+	public ArrayList<Menu> getShoppingCart(){
+		return new ArrayList<Menu>(shoppingCart.values());
+	}
+	@CrossOrigin
 	@GetMapping("/getmenus")
 	public ArrayList<Menu> getRestaurants(){
 		System.out.println("[AppController] getRestaurants called");
@@ -82,7 +89,7 @@ public class AppController {
 		
 		return menus;
 	}
-	
+	@CrossOrigin
 	@GetMapping("/getmenu")
 	public Menu getMenu(@RequestParam String inegratorName) {
 		System.out.println("[AppController] getMenu called");
@@ -90,6 +97,7 @@ public class AppController {
 		
 		return integrator.getMenu();
 	}
+	@CrossOrigin
 	@PostMapping("/submitorder")
 	public Response submitOrder(@RequestBody Order order) {
 		System.out.println("[AppController] submitOrder called");
