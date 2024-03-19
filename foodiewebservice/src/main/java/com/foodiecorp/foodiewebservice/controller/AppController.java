@@ -98,6 +98,13 @@ public class AppController {
 		return integrator.getMenu();
 	}
 	@CrossOrigin
+	@PostMapping("/gettotal")
+	public Float getTotal(@RequestBody Menu menu) {
+			IntegrationService integrator  = integrators.get(menu.getRestaurantName());
+			integrator.setTotal(menu);
+			return menu.getTotal();
+	}
+	@CrossOrigin
 	@PostMapping("/submitorder")
 	public Response submitOrder(@RequestBody Order order) {
 		System.out.println("[AppController] submitOrder called");
@@ -106,6 +113,7 @@ public class AppController {
 		integrator.submitOrder(order.getMenu(), order.getPayment());
 		
 		Response response = new Response();
+		response.setSuccess(true);
 		response.setMessage("successfull");
 		
 		return response;

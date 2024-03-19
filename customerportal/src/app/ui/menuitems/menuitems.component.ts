@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FoodieService } from 'src/app/service/foodiesrv.service';
 import { MenuItem } from 'src/app/model/menuitem';
 import { Menu } from 'src/app/model/menu';
+import { DatashareService } from 'src/app/service/datashare.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menuitems',
@@ -10,21 +12,42 @@ import { Menu } from 'src/app/model/menu';
 })
 export class MenuitemsComponent {
   menu:any;
-  menuitems:Array<MenuItem>
 
-  constructor(public foodieSrv:FoodieService){
-     this.menuitems = new Array<MenuItem>()
+  constructor(private foodieSrv:FoodieService,private router:Router, private dataSrvc:DatashareService){
+     this.menu = dataSrvc.getData()
     }
 
+    checkChanged(event:Event, item:MenuItem){
+      const isCheck = (<HTMLInputElement> event.target).checked
+      if(isCheck == true){
+        this.selectItem(item)
+      }else{
+        this.removeItem(item)
+      }
+    }
     selectItem(item:MenuItem):void{
-      this.menuitems.push(item);
+      this.menu.menuItems =  this.menu.menuItems.filter((i:MenuItem) => {
+        if(i.name == item.name)
+        {
+          i.isSelected = true
+        }
+        return true
+      })
+      console.log("[MenuitemsComponent] checkChanged: select item " + item.name)
     }
     removeItem(item:MenuItem):void{
-      this.menuitems =  this.menuitems.filter((i) => {i.name != item.name})
+      this.menu.menuItems =  this.menu.menuItems.filter((i:MenuItem) => {
+        if(i.name == item.name)
+        {
+          i.isSelected = false
+        }
+        return true
+      })
+      console.log("[MenuitemsComponent] checkChanged: remove item " + item.name)
     }
     addToShoppingCart():void{
-      this.menu.menuItems = this.menuitems
-      this.foodieSrv.addToShoppingCart(this.menu)
-    }
+      this.dataSrvc.setData(this.menu)
 
+      this.router.navigate(['/shoppingcart'])
+    }
 }

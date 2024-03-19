@@ -35,9 +35,15 @@ public class Pepes  extends IntegrationService{
 	}
 
 	@Override
-	public void setTotal(Menu menu) {
+	public void setTotal(Menu order) {
 		// TODO Auto-generated method stub
-		menu.setTotal(40.0f);
+		float total = 0;
+		for(MenuItem item : order.getMenuItems())
+		{
+			if(item.getIsSelected() != null && item.getIsSelected())
+			total += item.getPrice();
+		}
+		order.setTotal(total);
 	}
 
 	@Override

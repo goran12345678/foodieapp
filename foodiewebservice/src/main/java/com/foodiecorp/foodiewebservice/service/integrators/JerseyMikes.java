@@ -38,7 +38,13 @@ public class JerseyMikes extends IntegrationService{
 	public void setTotal(Menu order) {
 		// TODO Auto-generated method stub
 		//call restaurant API for total
-		order.setTotal(30.0f);
+		float total = 0;
+		for(MenuItem item : order.getMenuItems())
+		{
+			if(item.getIsSelected() != null && item.getIsSelected())
+			total += item.getPrice();
+		}
+		order.setTotal(total);
 	}
 
 	@Override

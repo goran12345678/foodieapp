@@ -9,6 +9,8 @@ public class MenuItem {
 	String description;
 	Float price;
 	Integer quantity;
+	Boolean isSelected;
+	
 	public MenuItem() {
 		// TODO Auto-generated constructor stub
 	}
@@ -48,6 +50,12 @@ public class MenuItem {
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	public Boolean getIsSelected() {
+		return isSelected;
+	}
+	public void setIsSelected(Boolean isSelected) {
+		this.isSelected = isSelected;
 	}
 	@Override
 	public String toString() {
