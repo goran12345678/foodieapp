@@ -40,8 +40,8 @@ export class ShoppingcartComponent {
   getTotal(): void {
     this.foodieSrvc.getTotal(this.menu).subscribe({
       next: (data: any) => { this.menu.total = data },
-      error: (error: any) => { console.log("[RestaurantsComponent] getRestaurants:Error:: ", error) },
-      complete: () => { console.log("[RestaurantsComponent] getRestaurants:Complete") }
+      error: (error: any) => { console.log("[ShoppingcartComponent] getTotal:Error:: ", error) },
+      complete: () => { console.log("[ShoppingcartComponent] getTotal:Complete") }
     })
   }
   submitOrder(): void {
@@ -49,12 +49,15 @@ export class ShoppingcartComponent {
     let order: Order = new Order()
     order.menu = this.menu
     order.payment = this.payment
+    console.log("[ShoppingcartComponent] submitOrder: " + JSON.stringify(order)) 
     this.foodieSrvc.submitOrder(order).subscribe({
       next: (data: any) => {
-        if (data.success == true)
+        if (data.success == true){
           this.ordersuccess = true
-        else
+        }
+        else{
           this.ordersuccess = false
+        }
       },
       error: (error: any) => { console.log("[ShoppingcartComponent] submitOrder:Error:: ", error) },
       complete: () => { console.log("[ShoppingcartComponent] submitOrder:Complete") }

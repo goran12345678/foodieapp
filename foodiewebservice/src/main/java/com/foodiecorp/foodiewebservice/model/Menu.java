@@ -1,14 +1,30 @@
 package com.foodiecorp.foodiewebservice.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 /*
  * Class envelope for menu items for specified restaurant
  */
-public class Menu {
+@Entity
+public class Menu implements Serializable{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Integer mid;
+	
 	String restaurantName; //displayed in frontend
 	String restaurantHours; //displayed in frontend
 	String restaurantAddress; //displayed in frontend
+	@Transient
 	ArrayList<MenuItem> menuItems; //populated by frontend
 	Float total;
 	public Menu() {
@@ -49,6 +65,12 @@ public class Menu {
 	}
 	public void setTotal(Float total) {
 		this.total = total;
+	}
+	public Integer getMid() {
+		return mid;
+	}
+	public void setMid(Integer mid) {
+		this.mid = mid;
 	}
 	@Override
 	public String toString() {

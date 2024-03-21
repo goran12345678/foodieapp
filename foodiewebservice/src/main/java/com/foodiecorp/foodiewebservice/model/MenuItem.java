@@ -1,9 +1,22 @@
 package com.foodiecorp.foodiewebservice.model;
 
+import java.io.Serializable;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /*
  * Class represents a menu item common to all restaurants.
  */
-public class MenuItem {
+@Entity
+public class MenuItem implements Serializable{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	Integer miid;
+	
 	String restaurantId;
 	String name;
 	String description;
@@ -56,6 +69,12 @@ public class MenuItem {
 	}
 	public void setIsSelected(Boolean isSelected) {
 		this.isSelected = isSelected;
+	}
+	public Integer getMiid() {
+		return miid;
+	}
+	public void setMiid(Integer miid) {
+		this.miid = miid;
 	}
 	@Override
 	public String toString() {
