@@ -24,6 +24,6 @@ RUN npm install
 RUN echo "installing angular cli"
 RUN npm install -g @angular/cli
 
-CMD ["ng","serve","--host","0.0.0.0","--port","9090"]
+CMD ["ng","serve","--host","0.0.0.0","--port","9191"]
 
 
